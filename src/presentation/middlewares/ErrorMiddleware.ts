@@ -1,5 +1,6 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResult } from "aws-lambda";
 import { ErrorHandler } from "../../shared/utilities/ErrorHandler";
+import { Logger } from "../../infrastructure/logger/Logger";
 
 export const withErrorHandling =
   (
@@ -9,6 +10,7 @@ export const withErrorHandling =
       try {
         return await handler(event);
       } catch (error) {
+        Logger.error("Unhandled Error", error);
         return ErrorHandler.handleError(error);
       }
     };

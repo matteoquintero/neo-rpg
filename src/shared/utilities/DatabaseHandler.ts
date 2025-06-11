@@ -1,5 +1,5 @@
-import { Logger } from "../../infrastructure/logger/Logger";
 import { ErrorHandler } from "./ErrorHandler";
+import { Logger } from "../../infrastructure/logger/Logger";
 
 export class DatabaseHandler {
   static async execute<T>(
