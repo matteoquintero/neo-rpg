@@ -1,7 +1,6 @@
 import { ZodSchema } from "zod";
 import { clientErrorResponse } from "../../shared/utilities/ResponseHelper";
 import { APIGatewayProxyResult } from "aws-lambda";
-import { Logger } from "../../infrastructure/logger/Logger";
 
 export abstract class BaseValidationMiddleware {
   protected abstract readonly schemas: Record<string, ZodSchema<any>>;
@@ -18,7 +17,7 @@ export abstract class BaseValidationMiddleware {
     const result = schema.safeParse(input);
     if (!result.success) {
       const issues = result.error.issues.map(
-        (i) => `${i.path.join(".")}: ${i.message}`
+        (i: any) => `${i.path.join(".")}: ${i.message}`
       );
       return clientErrorResponse(400, issues.join(" | "));
     }

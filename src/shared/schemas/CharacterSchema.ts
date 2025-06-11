@@ -32,7 +32,7 @@ export const UpdateCharacterAPISchema = z.object({
 });
 
 
-export const GetCharactersAPISchema = z.object({
+export const GetCharacterAPISchema = z.object({
   status: z.nativeEnum(SupportedStates, {
     errorMap: () => ({ message: "Invalid status" }),
   }),

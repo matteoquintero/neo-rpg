@@ -1,13 +1,13 @@
 import { APIGatewayProxyResult } from "aws-lambda";
 import { successResponse } from "../../shared/utilities/ResponseHelper";
 import { CharacterUseCase } from "../../application/cases/CharacterUseCase";
-import { BaseRouter } from "./BaseRouter";
 import { CharacterMiddleware } from "../middlewares/CharacterMiddleware";
 import {
   CreateCharacterInput,
   GetCharacterInput,
   UpdateCharacterInput,
 } from "../../application/dto/CharacterDto";
+import { BaseRouter } from "./BaseRouter";
 
 export class CharacterRouter extends BaseRouter {
   private validationMiddleware: CharacterMiddleware;
@@ -39,7 +39,7 @@ export class CharacterRouter extends BaseRouter {
           );
           return successResponse(201, {
             character,
-            message: "character created successfully",
+            message: "Character created successfully",
           });
         },
       ],
@@ -51,7 +51,7 @@ export class CharacterRouter extends BaseRouter {
           );
           return successResponse(200, {
             character,
-            message: "character updated successfully",
+            message: "Character updated successfully",
           });
         },
       ],

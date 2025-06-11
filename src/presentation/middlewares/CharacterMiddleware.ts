@@ -9,6 +9,6 @@ export class CharacterMiddleware extends BaseValidationMiddleware {
   protected readonly schemas = {
     "POST /character": CreateCharacterAPISchema,
     "PUT /character": UpdateCharacterAPISchema,
-    "GET /characters": GetCharacterAPISchema,
+    "GET /character": GetCharacterAPISchema,
   };
 }

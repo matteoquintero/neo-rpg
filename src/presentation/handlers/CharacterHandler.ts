@@ -1,5 +1,5 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResult } from "aws-lambda";
-import { CharacterRouter } from "../router/CharacterRouter";
+import { CharacterRouter } from "../../presentation/router/CharacterRouter";
 
 export class CharacterHandler {
   constructor(private readonly router: CharacterRouter) { }
