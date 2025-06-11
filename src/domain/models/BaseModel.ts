@@ -1,3 +1,4 @@
+import { ENTITY_TYPE_PREFIX } from "../../shared/constants/Identifiers";
 import { BaseModelParams } from "../../shared/types/BaseModelType";
 
 export abstract class BaseModel {
@@ -18,6 +19,10 @@ export abstract class BaseModel {
     this.entityType = entityType;
     this.createdAt = now;
     this.updatedAt = now;
+  }
+
+  static ExtractEntityType({ entityType }: { entityType: string }): string {
+    return entityType.replace(`${ENTITY_TYPE_PREFIX}#`, "");
   }
 
 }

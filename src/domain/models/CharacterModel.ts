@@ -6,6 +6,7 @@ import { BaseModel } from "./BaseModel";
 
 export class CharacterModel extends BaseModel {
   name: string;
+  status: SupportedStates;
   job: SupportedJobs;
   lifePoints: number;
   strength: number;
@@ -21,6 +22,7 @@ export class CharacterModel extends BaseModel {
       entityType: CharacterModel.CharacterEntityType(),
     });
     this.name = name;
+    this.status = status;
     this.job = job;
     this.lifePoints = lifePoints;
     this.strength = strength;
@@ -36,6 +38,10 @@ export class CharacterModel extends BaseModel {
 
   static CharacterSk({ job, characterId }: { job: SupportedJobs, characterId: string }): string {
     return `${JOB_PREFIX}#${job}#${CHARACTER_PREFIX}#${characterId}`;
+  }
+
+  static ExtractCharacterIdFromSk({ sk, job }: { sk: string, job: SupportedJobs }): string {
+    return sk.replace(`${JOB_PREFIX}#${job}#${CHARACTER_PREFIX}#`, "");
   }
 
   static CharacterEntityType() {

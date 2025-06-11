@@ -1,5 +1,6 @@
 import { CharacterModel } from "../../domain/models/CharacterModel";
 import { StorageService } from "../database/StorageService";
+import { Logger } from "../logger/Logger";
 
 export class CharacterRepository extends StorageService<CharacterModel> {
   constructor(tableName: string) {
@@ -45,6 +46,14 @@ export class CharacterRepository extends StorageService<CharacterModel> {
       partitionKey: pk,
       sortKey: sk
     });
+  }
+
+  async getCharactersByEntityType({
+    entityType
+  }: {
+    entityType: string
+  }): Promise<CharacterModel[]> {
+    return this.objectsByEntityType(entityType);
   }
 
 }

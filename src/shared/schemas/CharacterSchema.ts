@@ -7,7 +7,7 @@ export const CreateCharacterAPISchema = z.object({
     .max(15, "Name must be at most 15 characters long")
     .regex(/^[a-zA-Z_]+$/, "Name can only contain letters and underscores"),
   job: z.nativeEnum(SupportedJobs, {
-    errorMap: () => ({ message: "Invalid job" }),
+    errorMap: () => ({ message: `Invalid job. Supported jobs are: ${Object.values(SupportedJobs).join(', ')}` }),
   }),
 });
 
@@ -21,7 +21,7 @@ export const UpdateCharacterAPISchema = z.object({
         .max(15, "Name must be at most 15 characters long")
         .regex(/^[a-zA-Z_]+$/, "Name can only contain letters and underscores"),
       job: z.nativeEnum(SupportedJobs, {
-        errorMap: () => ({ message: "Invalid job" }),
+        errorMap: () => ({ message: `Invalid job. Supported jobs are: ${Object.values(SupportedJobs).join(', ')}` }),
       }),
 
     })

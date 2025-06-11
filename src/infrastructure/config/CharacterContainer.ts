@@ -3,11 +3,13 @@ import { CharacterDomainService } from "../../domain/logic/CharacterDomainServic
 import { CharacterHandler } from "../../presentation/handlers/CharacterHandler";
 import { CharacterRouter } from "../../presentation/router/CharacterRouter";
 import { CharacterRepository } from "../../infrastructure/repositories/CharacterRepository";
+import { CharacterAttributesFactory } from "../../application/services/CharacterAttributesFactory";
 
 const CHARACTERS_TABLE_NAME = process.env.CHARACTERS_TABLE_NAME as string;
 
 const CharacterRepositoryObject = new CharacterRepository(CHARACTERS_TABLE_NAME);
-const CharacterDomainServiceObject = new CharacterDomainService();
+const CharacterAttributesFactoryObject = new CharacterAttributesFactory();
+const CharacterDomainServiceObject = new CharacterDomainService(CharacterAttributesFactoryObject);
 const CharacterUseCaseObject = new CharacterUseCase(
   CharacterDomainServiceObject,
   CharacterRepositoryObject

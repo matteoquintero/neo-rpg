@@ -1,45 +1,76 @@
-import { CreateCharacterInput, GetCharacterOutput } from "../../application/dto/CharacterDto";
-import { CHARACTER_PREFIX, JOB_PREFIX, STATE_PREFIX } from "../../shared/constants/Identifiers";
+import { CreateCharacterInput, GetCharacterOutput, UpdateCharacterInput } from "../../application/dto/CharacterDto";
 import { SupportedJobs, SupportedStates } from "../../shared/enums/Domains";
 import { ErrorHandler } from "../../shared/utilities/ErrorHandler";
 import { CharacterModel } from "../models/CharacterModel";
+import { CharacterAttributesFactory, CreateAttributesInput } from "../../application/services/CharacterAttributesFactory";
+import { Logger } from "../../infrastructure/logger/Logger";
 
 export class CharacterDomainService {
+  constructor(
+    private readonly characterAttributesFactory: CharacterAttributesFactory
+  ) { }
 
   getKeys({ status, job, characterId }: { status?: SupportedStates; job?: SupportedJobs; characterId?: string }): { pk: string | undefined; sk: string | undefined } {
     return CharacterModel.getKeys({ status, job, characterId });
   }
 
-  buildModelFromInput(
+  getEntityType(): string {
+    return CharacterModel.CharacterEntityType();
+  }
+
+  buildCreateModel(
     input: CreateCharacterInput & { CharacterId: string }
   ): CharacterModel {
+
+    const jobAttributes = this.characterAttributesFactory.createAttributes({
+      job: input.job,
+    });
+
     return new CharacterModel({
       characterId: input.CharacterId,
-      status: input.status,
+      status: SupportedStates.ALIVE,
       name: input.name,
       job: input.job,
-      lifePoints: input.lifePoints,
-      strength: input.strength,
-      dexterity: input.dexterity,
-      intelligence: input.intelligence,
-      attackModifier: input.attackModifier,
-      speedModifier: input.speedModifier,
+      lifePoints: jobAttributes.getHealthPoints(),
+      strength: jobAttributes.getStrength(),
+      dexterity: jobAttributes.getDexterity(),
+      intelligence: jobAttributes.getIntelligence(),
+      attackModifier: jobAttributes.calculateAttackModifier(),
+      speedModifier: jobAttributes.calculateSpeedModifier(),
     });
+  }
+
+  buildUpdateAttributes(existing: CharacterModel, updates: Partial<CharacterModel>): CreateAttributesInput {
+    const jobAttributes = this.characterAttributesFactory.createAttributes({
+      job: existing.job,
+      healthPoints: updates.lifePoints,
+      strength: updates.strength,
+      dexterity: updates.dexterity,
+      intelligence: updates.intelligence,
+    });
+
+    return {
+      job: existing.job,
+      healthPoints: jobAttributes.getHealthPoints(),
+      strength: jobAttributes.getStrength(),
+      dexterity: jobAttributes.getDexterity(),
+      intelligence: jobAttributes.getIntelligence(),
+      attackModifier: jobAttributes.calculateAttackModifier(),
+      speedModifier: jobAttributes.calculateSpeedModifier(),
+    };
   }
 
   toOutput(model: CharacterModel): GetCharacterOutput {
     if (!model.pk || !model.sk) {
       throw new ErrorHandler("Invalid model: pk or sk keys are missing.", 400);
     }
-
-    const status = model.pk.replace(`${STATE_PREFIX}#`, "") as SupportedStates;
-    const job = model.sk.replace(`${JOB_PREFIX}#`, "") as SupportedJobs;
-    const characterId = model.sk.replace(`${CHARACTER_PREFIX}#`, "");
+    const characterId = CharacterModel.ExtractCharacterIdFromSk({ sk: model.sk, job: model.job });
+    const entityType = CharacterModel.ExtractEntityType({ entityType: model.entityType });
 
     return {
-      status,
-      job,
       characterId,
+      job: model.job,
+      status: model.status,
       name: model.name,
       lifePoints: model.lifePoints,
       strength: model.strength,
@@ -47,7 +78,7 @@ export class CharacterDomainService {
       intelligence: model.intelligence,
       attackModifier: model.attackModifier,
       speedModifier: model.speedModifier,
-      entityType: model.entityType,
+      entityType,
       createdAt: model.createdAt,
       updatedAt: model.updatedAt,
     };

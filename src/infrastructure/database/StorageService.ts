@@ -1,4 +1,5 @@
 import { BaseModel } from "../../domain/models/BaseModel";
+import { Logger } from "../logger/Logger";
 
 export class StorageService<T extends BaseModel> {
   private static instance: StorageService<any>;
@@ -63,16 +64,16 @@ export class StorageService<T extends BaseModel> {
     return partition.get(sortKey) || null;
   }
 
-  async objectsByPartitionKey({
-    partitionKey
-  }: {
-    partitionKey: string
-  }): Promise<T[]> {
+  private getAllObjects(): T[] {
     const table = this.getTable();
-    const partition = table.get(partitionKey);
-    if (!partition) {
-      return [];
-    }
-    return Array.from(partition.values());
+    return Array.from(table.values()).flatMap(partition => Array.from(partition.values()));
+  }
+
+  async objectsBySortKeyBegins(beginsWith: string): Promise<T[]> {
+    return this.getAllObjects().filter(object => object.sk.startsWith(beginsWith));
+  }
+
+  async objectsByEntityType(entityType: string): Promise<T[]> {
+    return this.getAllObjects().filter(object => object.entityType === entityType);
   }
 }

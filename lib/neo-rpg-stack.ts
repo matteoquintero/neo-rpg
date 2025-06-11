@@ -55,6 +55,12 @@ export class NeoRpgStack extends cdk.Stack {
       integration: CharacterFunctionIntegration,
     });
 
+    HttpApiNeoRpg.addRoutes({
+      path: "/character",
+      methods: [HttpMethod.GET],
+      integration: CharacterFunctionIntegration,
+    });
+
     new cdk.CfnOutput(this, "NeoRpgApiUrl", {
       value: HttpApiNeoRpg.apiEndpoint,
       description: "The URL of the Neo RPG API",

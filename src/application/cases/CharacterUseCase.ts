@@ -22,7 +22,7 @@ export class CharacterUseCase {
   ): Promise<GetCharacterOutput> {
 
     const CharacterId = uuidv4();
-    const CharacterModel = this.domainService.buildModelFromInput({
+    const CharacterModel = this.domainService.buildCreateModel({
       ...input,
       CharacterId,
     });
@@ -60,6 +60,19 @@ export class CharacterUseCase {
       `Error retrieving character ${input.characterId}.`
     );
     this.domainService.ensureExists(existing);
+    if (!existing) {
+      throw new ErrorHandler("Character not found", 404);
+    }
+
+    if (input.updates.lifePoints !== undefined || input.updates.strength !== undefined || input.updates.dexterity !== undefined || input.updates.intelligence !== undefined) {
+      const updatedJobAttributes = this.domainService.buildUpdateAttributes(existing, input.updates);
+      input.updates.lifePoints = updatedJobAttributes.healthPoints;
+      input.updates.strength = updatedJobAttributes.strength;
+      input.updates.dexterity = updatedJobAttributes.dexterity;
+      input.updates.intelligence = updatedJobAttributes.intelligence;
+      input.updates.attackModifier = updatedJobAttributes.attackModifier;
+      input.updates.speedModifier = updatedJobAttributes.speedModifier;
+    }
 
     const updated = await DatabaseHandler.execute(
       () => this.repository.updateCharacter({
@@ -97,6 +110,21 @@ export class CharacterUseCase {
     );
 
     return this.domainService.toOutput(models!);
+  }
+
+  async getCharacters(
+    input: GetCharacterInput
+  ): Promise<GetCharacterOutput[]> {
+    const entityType = this.domainService.getEntityType();
+    const models = await DatabaseHandler.execute(
+      () =>
+        this.repository.getCharactersByEntityType({
+          entityType
+        }),
+      `Characters retrieved for entity type ${entityType}.`,
+      `Error retrieving characters for entity type ${entityType}.`
+    );
+    return this.domainService.toOutputArray(models);
   }
 
 
