@@ -3,7 +3,6 @@ import { SupportedJobs, SupportedStates } from "../../shared/enums/Domains";
 import { ErrorHandler } from "../../shared/utilities/ErrorHandler";
 import { CharacterModel } from "../models/CharacterModel";
 import { CharacterAttributesFactory, CreateAttributesInput } from "../../application/services/CharacterAttributesFactory";
-import { Logger } from "../../infrastructure/logger/Logger";
 
 export class CharacterDomainService {
   constructor(

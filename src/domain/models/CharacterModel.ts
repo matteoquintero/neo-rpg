@@ -9,6 +9,7 @@ export class CharacterModel extends BaseModel {
   status: SupportedStates;
   job: SupportedJobs;
   lifePoints: number;
+  currentLifePoints: number;
   strength: number;
   dexterity: number;
   intelligence: number;
@@ -25,6 +26,7 @@ export class CharacterModel extends BaseModel {
     this.status = status;
     this.job = job;
     this.lifePoints = lifePoints;
+    this.currentLifePoints = lifePoints;
     this.strength = strength;
     this.dexterity = dexterity;
     this.intelligence = intelligence;

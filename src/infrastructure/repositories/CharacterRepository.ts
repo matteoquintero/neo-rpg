@@ -1,10 +1,18 @@
 import { CharacterModel } from "../../domain/models/CharacterModel";
 import { StorageService } from "../database/StorageService";
-import { Logger } from "../logger/Logger";
 
 export class CharacterRepository extends StorageService<CharacterModel> {
-  constructor(tableName: string) {
+  private static instance: CharacterRepository;
+
+  private constructor(tableName: string) {
     super(tableName);
+  }
+
+  public static getInstance(tableName: string): CharacterRepository {
+    if (!CharacterRepository.instance) {
+      CharacterRepository.instance = new CharacterRepository(tableName);
+    }
+    return CharacterRepository.instance;
   }
 
   async saveCharacter({
@@ -55,5 +63,4 @@ export class CharacterRepository extends StorageService<CharacterModel> {
   }): Promise<CharacterModel[]> {
     return this.objectsByEntityType(entityType);
   }
-
 }

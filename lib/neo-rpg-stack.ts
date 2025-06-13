@@ -13,14 +13,16 @@ export class NeoRpgStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const CharacterFunction = new lambdaNodeJs.NodejsFunction(
+    const tableName = 'NeoRpgTable';
+
+    const NeoRpgFunction = new lambdaNodeJs.NodejsFunction(
       this,
-      'CharacterLambda',
+      'NeoRpgLambda',
       {
         runtime: Runtime.NODEJS_18_X,
-        entry: 'src/presentation/lambda/CharacterLambda.ts',
+        entry: 'src/presentation/lambda/NeoRpgLambda.ts',
         environment: {
-          TABLE_NAME: 'CharactersTable',
+          NEO_RPG_TABLE_NAME: tableName,
         },
       }
     );
@@ -38,27 +40,47 @@ export class NeoRpgStack extends cdk.Stack {
       },
     });
 
-    const CharacterFunctionIntegration = new HttpLambdaIntegration(
-      "CharacterFunctionIntegration",
-      CharacterFunction
+    const NeoRpgFunctionIntegration = new HttpLambdaIntegration(
+      "NeoRpgFunctionIntegration",
+      NeoRpgFunction
     );
 
+    // Rutas de personajes
     HttpApiNeoRpg.addRoutes({
       path: "/character",
       methods: [HttpMethod.POST, HttpMethod.PUT],
-      integration: CharacterFunctionIntegration,
+      integration: NeoRpgFunctionIntegration,
     });
 
     HttpApiNeoRpg.addRoutes({
       path: "/characters",
       methods: [HttpMethod.GET],
-      integration: CharacterFunctionIntegration,
+      integration: NeoRpgFunctionIntegration,
     });
 
     HttpApiNeoRpg.addRoutes({
       path: "/character",
       methods: [HttpMethod.GET],
-      integration: CharacterFunctionIntegration,
+      integration: NeoRpgFunctionIntegration,
+    });
+
+    // Rutas de batallas
+    HttpApiNeoRpg.addRoutes({
+      path: "/battle",
+      methods: [HttpMethod.POST, HttpMethod.PUT],
+      integration: NeoRpgFunctionIntegration,
+    });
+
+    HttpApiNeoRpg.addRoutes({
+      path: "/battle",
+      methods: [HttpMethod.GET],
+      integration: NeoRpgFunctionIntegration,
+    });
+
+    HttpApiNeoRpg.addRoutes({
+      path: "/battles",
+      methods: [HttpMethod.GET],
+      integration: NeoRpgFunctionIntegration,
     });
 
     new cdk.CfnOutput(this, "NeoRpgApiUrl", {

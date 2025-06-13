@@ -64,16 +64,6 @@ export class CharacterUseCase {
       throw new ErrorHandler("Character not found", 404);
     }
 
-    if (input.updates.lifePoints !== undefined || input.updates.strength !== undefined || input.updates.dexterity !== undefined || input.updates.intelligence !== undefined) {
-      const updatedJobAttributes = this.domainService.buildUpdateAttributes(existing, input.updates);
-      input.updates.lifePoints = updatedJobAttributes.healthPoints;
-      input.updates.strength = updatedJobAttributes.strength;
-      input.updates.dexterity = updatedJobAttributes.dexterity;
-      input.updates.intelligence = updatedJobAttributes.intelligence;
-      input.updates.attackModifier = updatedJobAttributes.attackModifier;
-      input.updates.speedModifier = updatedJobAttributes.speedModifier;
-    }
-
     const updated = await DatabaseHandler.execute(
       () => this.repository.updateCharacter({
         pk,
@@ -112,9 +102,7 @@ export class CharacterUseCase {
     return this.domainService.toOutput(models!);
   }
 
-  async getCharacters(
-    input: GetCharacterInput
-  ): Promise<GetCharacterOutput[]> {
+  async getCharacters(): Promise<GetCharacterOutput[]> {
     const entityType = this.domainService.getEntityType();
     const models = await DatabaseHandler.execute(
       () =>

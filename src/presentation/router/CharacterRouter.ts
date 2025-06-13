@@ -67,9 +67,7 @@ export class CharacterRouter extends BaseRouter {
       [
         "GET /characters",
         async () => {
-          const characters = await this.useCase.getCharacters(
-            input as GetCharacterInput
-          );
+          const characters = await this.useCase.getCharacters();
           return successResponse(200, { characters });
         },
       ],
