@@ -2,7 +2,7 @@ I understand the original deadline for this technical test was yesterday. Howeve
 
 Neo RPG – RPG Battle
 
-This proyect is built using Clean Architecture and Domain-Driven Design (DDD) principles. This project was developed as a technical test to demonstrate the ability to structure scalable, maintainable, and testable software with a strong architectural foundation.
+This project is built using Clean Architecture and Domain-Driven Design (DDD) principles. It was developed as a technical test to demonstrate the ability to structure scalable, maintainable, and testable software with a strong architectural foundation. Please note that the application is deployed on AWS using Lambda functions, which do not preserve in-memory data between executions after a period of inactivity. As a result, if the API is not used for several minutes, previously stored data may be lost due to the ephemeral nature of Lambda memory.
 
 Architectural Approach
 
