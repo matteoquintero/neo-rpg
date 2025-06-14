@@ -12,6 +12,7 @@ import { DatabaseHandler } from "../../shared/utilities/DatabaseHandler";
 import { ErrorHandler } from "../../shared/utilities/ErrorHandler";
 import { EnsureCharacterService } from "../../domain/services/EnsureCharacterService";
 import { SupportedStates } from "../../shared/enums/Domains";
+import { BattleRoundService } from "../../domain/services/BattleRoundService";
 
 export class BattleUseCase {
   constructor(
@@ -37,11 +38,13 @@ export class BattleUseCase {
     });
 
     const BattleId = uuidv4();
+    const battleRoundService = new BattleRoundService();
+    const rounds = battleRoundService.generateBattleRounds(characterX, characterY);
 
     const createInputExtended: CreateBattleInputExtended = {
       characterX,
       characterY,
-      rounds: []
+      rounds
     };
 
     const BattleModel = this.domainService.buildCreateModel({
