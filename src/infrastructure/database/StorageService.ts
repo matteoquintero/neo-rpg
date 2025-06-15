@@ -21,7 +21,7 @@ export abstract class StorageService<T extends BaseModel> {
         data: item
       }))
     }));
-    Logger.info(`Table content: ${JSON.stringify(tableContent)}`);
+    Logger.info(`Table content: ${JSON.stringify(tableContent, null, 2)}`);
 
     return this.storage as Map<string, Map<string, T>>;
   }
@@ -38,10 +38,12 @@ export abstract class StorageService<T extends BaseModel> {
   async updateObject({
     partitionKey,
     sortKey,
+    newSortKey,
     updates
   }: {
     partitionKey: string,
     sortKey: string,
+    newSortKey?: string,
     updates: Partial<T>
   }): Promise<T> {
     const table = this.getTable();
@@ -57,6 +59,10 @@ export abstract class StorageService<T extends BaseModel> {
 
     const updatedItem = { ...item, ...updates };
     partition.set(sortKey, updatedItem as T);
+    if (newSortKey) {
+      partition.set(newSortKey, updatedItem as T);
+      partition.delete(sortKey);
+    }
     Logger.info(`Updated item with pk: ${partitionKey} and sk: ${sortKey}`);
     return updatedItem as T;
   }

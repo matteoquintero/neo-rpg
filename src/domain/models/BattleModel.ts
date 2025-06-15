@@ -8,7 +8,9 @@ export class BattleModel extends BaseModel {
   rounds: BattleRound[];
   characterX: GetCharacterOutput;
   characterY: GetCharacterOutput;
-  constructor({ battleId, characterX, characterY, rounds }: BattleModelType) {
+  winner: GetCharacterOutput | null;
+  loser: GetCharacterOutput | null;
+  constructor({ battleId, characterX, characterY, rounds, winner, loser }: BattleModelType) {
     super({
       pk: BattleModel.BattlePk(
         {
@@ -24,6 +26,8 @@ export class BattleModel extends BaseModel {
     this.rounds = rounds;
     this.characterX = characterX;
     this.characterY = characterY;
+    this.winner = winner;
+    this.loser = loser;
   }
 
   static BattlePk({ characterXId, characterYId, characterXJob, characterYJob }: { characterXId: string, characterYId: string, characterXJob: SupportedJobs, characterYJob: SupportedJobs }) {

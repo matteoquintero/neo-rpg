@@ -13,12 +13,14 @@ import { ErrorHandler } from "../../shared/utilities/ErrorHandler";
 import { EnsureCharacterService } from "../../domain/services/EnsureCharacterService";
 import { SupportedStates } from "../../shared/enums/Domains";
 import { BattleRoundService } from "../../domain/services/BattleRoundService";
+import { KillCharacterService } from "../../domain/services/KillCharacterService";
 
 export class BattleUseCase {
   constructor(
     private readonly domainService: BattleDomainService,
     private readonly repository: BattleRepository,
-    private readonly ensureCharacterService: EnsureCharacterService
+    private readonly ensureCharacterService: EnsureCharacterService,
+    private readonly killCharacterService: KillCharacterService
   ) { }
 
   async createBattle(
@@ -39,12 +41,18 @@ export class BattleUseCase {
 
     const BattleId = uuidv4();
     const battleRoundService = new BattleRoundService();
-    const rounds = battleRoundService.generateBattleRounds(characterX, characterY);
+    const battleResult = battleRoundService.generateBattleRounds(characterX, characterY);
+
+    if (battleResult.loser) {
+      await this.killCharacterService.execute(battleResult.loser);
+    }
 
     const createInputExtended: CreateBattleInputExtended = {
       characterX,
       characterY,
-      rounds
+      rounds: battleResult.rounds,
+      winner: battleResult.winner,
+      loser: battleResult.loser
     };
 
     const BattleModel = this.domainService.buildCreateModel({

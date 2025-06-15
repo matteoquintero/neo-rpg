@@ -1,5 +1,4 @@
 import { GetCharacterOutput } from "../../application/dto/CharacterDto";
-import { SupportedJobs } from "../enums/Domains";
 
 export interface BattleTurn {
   turnNumber: number;
@@ -20,5 +19,13 @@ export type BattleModelType = {
   battleId: string;
   characterX: GetCharacterOutput;
   characterY: GetCharacterOutput;
+  winner: GetCharacterOutput | null;
+  loser: GetCharacterOutput | null;
   rounds: BattleRound[];
+}
+
+export interface BattleResult {
+  rounds: BattleRound[];
+  winner: GetCharacterOutput;
+  loser: GetCharacterOutput | null;
 }

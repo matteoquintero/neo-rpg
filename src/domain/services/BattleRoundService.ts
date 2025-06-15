@@ -1,5 +1,5 @@
 import { GetCharacterOutput } from "../../application/dto/CharacterDto";
-import { BattleRound, BattleTurn } from "../../shared/types/BattleModelType";
+import { BattleRound, BattleTurn, BattleResult } from "../../shared/types/BattleModelType";
 
 export class BattleRoundService {
   private currentRound: number = 1;
@@ -32,7 +32,7 @@ export class BattleRoundService {
     defender: GetCharacterOutput
   ): BattleTurn {
     const damage = this.calculateDamage(attacker);
-    const remainingHealth = Math.max(0, defender.lifePoints - damage);
+    const remainingHealth = Math.max(0, defender.currentLifePoints - damage);
 
     return {
       turnNumber,
@@ -62,9 +62,9 @@ export class BattleRoundService {
 
     // Update defender's health after first turn
     if (firstTurn.characterDefending === characterX) {
-      characterX.lifePoints = firstTurn.characterDefendingRemaining;
+      characterX.currentLifePoints = firstTurn.characterDefendingRemaining;
     } else {
-      characterY.lifePoints = firstTurn.characterDefendingRemaining;
+      characterY.currentLifePoints = firstTurn.characterDefendingRemaining;
     }
 
     // Only create second turn if the defender is still alive
@@ -74,9 +74,9 @@ export class BattleRoundService {
 
       // Update defender's health after second turn
       if (secondTurn.characterDefending === characterX) {
-        characterX.lifePoints = secondTurn.characterDefendingRemaining;
+        characterX.currentLifePoints = secondTurn.characterDefendingRemaining;
       } else {
-        characterY.lifePoints = secondTurn.characterDefendingRemaining;
+        characterY.currentLifePoints = secondTurn.characterDefendingRemaining;
       }
     }
 
@@ -87,22 +87,32 @@ export class BattleRoundService {
   public generateBattleRounds(
     characterX: GetCharacterOutput,
     characterY: GetCharacterOutput
-  ): BattleRound[] {
+  ): BattleResult {
     const rounds: BattleRound[] = [];
     let currentCharacterX = { ...characterX };
     let currentCharacterY = { ...characterY };
 
-    while (currentCharacterX.lifePoints > 0 && currentCharacterY.lifePoints > 0) {
+    while (currentCharacterX.currentLifePoints > 0 && currentCharacterY.currentLifePoints > 0) {
       const round = this.generateSingleRound(currentCharacterX, currentCharacterY);
       rounds.push(round);
 
       // Check if any character is defeated after the round
-      if (currentCharacterX.lifePoints <= 0 || currentCharacterY.lifePoints <= 0) {
+      if (currentCharacterX.currentLifePoints <= 0 || currentCharacterY.currentLifePoints <= 0) {
         break;
       }
     }
 
-    return rounds;
+    const lastRound = rounds[rounds.length - 1];
+    const lastTurn = lastRound.turns[lastRound.turns.length - 1];
+    const loser = lastTurn.characterDefendingRemaining === 0 ? lastTurn.characterDefending : null;
+    if (loser) {
+      loser.currentLifePoints = 0;
+    }
+    return {
+      rounds,
+      winner: lastTurn.characterAttacking,
+      loser
+    };
   }
 
   public resetRounds(): void {

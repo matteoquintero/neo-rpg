@@ -34,6 +34,7 @@ export interface GetCharacterOutput {
   characterId: string;
   name: string;
   lifePoints: number;
+  currentLifePoints: number;
   strength: number;
   dexterity: number;
   intelligence: number;

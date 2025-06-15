@@ -1,4 +1,5 @@
 ;
+import { Logger } from "../../infrastructure/logger/Logger";
 import { CHARACTER_PREFIX, ENTITY_TYPE_PREFIX, JOB_PREFIX, NAME_PREFIX, STATE_PREFIX } from "../../shared/constants/Identifiers";
 import { SupportedJobs, SupportedStates } from "../../shared/enums/Domains";
 import { CharacterModelType } from "../../shared/types/CharacterModelType";
@@ -18,8 +19,8 @@ export class CharacterModel extends BaseModel {
 
   constructor({ characterId, status, name, job, lifePoints, strength, dexterity, intelligence, attackModifier, speedModifier }: CharacterModelType) {
     super({
-      pk: CharacterModel.CharacterPk({ status }),
-      sk: CharacterModel.CharacterSk({ job, characterId }),
+      pk: CharacterModel.CharacterPk({ job }),
+      sk: CharacterModel.CharacterSk({ status, characterId }),
       entityType: CharacterModel.CharacterEntityType(),
     });
     this.name = name;
@@ -34,16 +35,17 @@ export class CharacterModel extends BaseModel {
     this.speedModifier = speedModifier;
   }
 
-  static CharacterPk({ status }: { status: SupportedStates }): string {
-    return `${STATE_PREFIX}#${status}`;
+  static CharacterPk({ job }: { job: SupportedJobs }): string {
+    return `${JOB_PREFIX}#${job}`;
   }
 
-  static CharacterSk({ job, characterId }: { job: SupportedJobs, characterId: string }): string {
-    return `${JOB_PREFIX}#${job}#${CHARACTER_PREFIX}#${characterId}`;
+  static CharacterSk({ status, characterId }: { status: SupportedStates, characterId: string }): string {
+    return `${STATE_PREFIX}#${status}#${CHARACTER_PREFIX}#${characterId}`;
   }
 
-  static ExtractCharacterIdFromSk({ sk, job }: { sk: string, job: SupportedJobs }): string {
-    return sk.replace(`${JOB_PREFIX}#${job}#${CHARACTER_PREFIX}#`, "");
+  static ExtractCharacterIdFromSk({ sk, status }: { sk: string, status: SupportedStates }): string {
+    Logger.info(`Extracting character id from sk: ${sk} and status: ${status}`);
+    return sk.replace(`${STATE_PREFIX}#${status}#${CHARACTER_PREFIX}#`, "");
   }
 
   static CharacterEntityType() {
@@ -55,8 +57,8 @@ export class CharacterModel extends BaseModel {
     sk: string | undefined;
   } {
     return {
-      pk: status ? this.CharacterPk({ status }) : undefined,
-      sk: job && characterId ? this.CharacterSk({ job, characterId }) : undefined,
+      pk: job ? this.CharacterPk({ job }) : undefined,
+      sk: status && characterId ? this.CharacterSk({ status, characterId }) : undefined,
     };
   }
 

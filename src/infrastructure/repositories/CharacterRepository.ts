@@ -1,5 +1,6 @@
 import { CharacterModel } from "../../domain/models/CharacterModel";
 import { StorageService } from "../database/StorageService";
+import { Logger } from "../logger/Logger";
 
 export class CharacterRepository extends StorageService<CharacterModel> {
   private static instance: CharacterRepository;
@@ -26,19 +27,23 @@ export class CharacterRepository extends StorageService<CharacterModel> {
   async updateCharacter({
     pk,
     sk,
+    newSk,
     updates
   }: {
     pk: string,
     sk: string,
+    newSk?: string,
     updates: Partial<CharacterModel>
   }): Promise<CharacterModel> {
     const updatesWithTimestamp = {
       ...updates,
       updatedAt: new Date().toISOString(),
     };
+    Logger.info(`Updating character ${sk} with updates: ${JSON.stringify(updatesWithTimestamp)}`);
     return this.updateObject({
       partitionKey: pk,
       sortKey: sk,
+      newSortKey: newSk,
       updates: updatesWithTimestamp
     });
   }

@@ -13,6 +13,8 @@ export interface CreateBattleInputExtended {
   rounds: BattleRound[];
   characterX: GetCharacterOutput;
   characterY: GetCharacterOutput;
+  winner: GetCharacterOutput | null;
+  loser: GetCharacterOutput | null;
 }
 
 export interface GetBattleInput {
@@ -29,6 +31,8 @@ export interface GetBattleOutput {
   characterY: GetCharacterOutput;
   rounds: BattleRound[];
   entityType: string;
+  winner: GetCharacterOutput | null;
+  loser: GetCharacterOutput | null;
   createdAt: string;
   updatedAt: string;
 }

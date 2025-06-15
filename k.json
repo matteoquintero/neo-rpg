@@ -1,0 +1,452 @@
+[
+	{ "partitionKey": "NeoRpgTable", "items": [] },
+	{
+		"partitionKey": "Character#c4884e02-8dd6-4d6f-a4b9-ef22285a3f86#JobMage#Character#fcc554d2-8ab0-4611-9bb7-83e625a9883d#JobWarrior",
+		"items": [
+			{
+				"sortKey": "Battle#764fd6f2-131d-42b8-b154-cf5d9932c672",
+				"data": {
+					"pk": "Character#c4884e02-8dd6-4d6f-a4b9-ef22285a3f86#JobMage#Character#fcc554d2-8ab0-4611-9bb7-83e625a9883d#JobWarrior",
+					"sk": "Battle#764fd6f2-131d-42b8-b154-cf5d9932c672",
+					"entityType": "EntityType#Battle",
+					"createdAt": "2025-06-15T01:07:20.131Z",
+					"updatedAt": "2025-06-15T01:07:20.131Z",
+					"rounds": [
+						{
+							"roundNumber": 1,
+							"characterXSpeed": 2.9000000000000004,
+							"characterYSpeed": 4,
+							"turns": [
+								{
+									"turnNumber": 1,
+									"characterAttacking": {
+										"characterId": "fcc554d2-8ab0-4611-9bb7-83e625a9883d",
+										"job": "Warrior",
+										"status": "Alive",
+										"name": "cholo_quintero",
+										"lifePoints": 20,
+										"currentLifePoints": 20,
+										"strength": 10,
+										"dexterity": 5,
+										"intelligence": 5,
+										"attackModifier": 9,
+										"speedModifier": 4,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:02:04.724Z",
+										"updatedAt": "2025-06-15T01:02:04.724Z"
+									},
+									"characterAttackingDamage": 5,
+									"characterDefending": {
+										"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+										"job": "Mage",
+										"status": "Alive",
+										"name": "lupe_quintero",
+										"lifePoints": 12,
+										"currentLifePoints": 12,
+										"strength": 5,
+										"dexterity": 6,
+										"intelligence": 10,
+										"attackModifier": 14.2,
+										"speedModifier": 2.9000000000000004,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:01:44.385Z",
+										"updatedAt": "2025-06-15T01:01:44.385Z"
+									},
+									"characterDefendingRemaining": 7
+								},
+								{
+									"turnNumber": 2,
+									"characterAttacking": {
+										"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+										"job": "Mage",
+										"status": "Alive",
+										"name": "lupe_quintero",
+										"lifePoints": 12,
+										"currentLifePoints": 12,
+										"strength": 5,
+										"dexterity": 6,
+										"intelligence": 10,
+										"attackModifier": 14.2,
+										"speedModifier": 2.9000000000000004,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:01:44.385Z",
+										"updatedAt": "2025-06-15T01:01:44.385Z"
+									},
+									"characterAttackingDamage": 1,
+									"characterDefending": {
+										"characterId": "fcc554d2-8ab0-4611-9bb7-83e625a9883d",
+										"job": "Warrior",
+										"status": "Alive",
+										"name": "cholo_quintero",
+										"lifePoints": 20,
+										"currentLifePoints": 7,
+										"strength": 10,
+										"dexterity": 5,
+										"intelligence": 5,
+										"attackModifier": 9,
+										"speedModifier": 4,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:02:04.724Z",
+										"updatedAt": "2025-06-15T01:02:04.724Z"
+									},
+									"characterDefendingRemaining": 6
+								}
+							]
+						},
+						{
+							"roundNumber": 2,
+							"characterXSpeed": 2.9000000000000004,
+							"characterYSpeed": 4,
+							"turns": [
+								{
+									"turnNumber": 1,
+									"characterAttacking": {
+										"characterId": "fcc554d2-8ab0-4611-9bb7-83e625a9883d",
+										"job": "Warrior",
+										"status": "Alive",
+										"name": "cholo_quintero",
+										"lifePoints": 20,
+										"currentLifePoints": 6,
+										"strength": 10,
+										"dexterity": 5,
+										"intelligence": 5,
+										"attackModifier": 9,
+										"speedModifier": 4,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:02:04.724Z",
+										"updatedAt": "2025-06-15T01:02:04.724Z"
+									},
+									"characterAttackingDamage": 6,
+									"characterDefending": {
+										"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+										"job": "Mage",
+										"status": "Alive",
+										"name": "lupe_quintero",
+										"lifePoints": 12,
+										"currentLifePoints": 12,
+										"strength": 5,
+										"dexterity": 6,
+										"intelligence": 10,
+										"attackModifier": 14.2,
+										"speedModifier": 2.9000000000000004,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:01:44.385Z",
+										"updatedAt": "2025-06-15T01:01:44.385Z"
+									},
+									"characterDefendingRemaining": 6
+								},
+								{
+									"turnNumber": 2,
+									"characterAttacking": {
+										"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+										"job": "Mage",
+										"status": "Alive",
+										"name": "lupe_quintero",
+										"lifePoints": 12,
+										"currentLifePoints": 12,
+										"strength": 5,
+										"dexterity": 6,
+										"intelligence": 10,
+										"attackModifier": 14.2,
+										"speedModifier": 2.9000000000000004,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:01:44.385Z",
+										"updatedAt": "2025-06-15T01:01:44.385Z"
+									},
+									"characterAttackingDamage": 7,
+									"characterDefending": {
+										"characterId": "fcc554d2-8ab0-4611-9bb7-83e625a9883d",
+										"job": "Warrior",
+										"status": "Alive",
+										"name": "cholo_quintero",
+										"lifePoints": 20,
+										"currentLifePoints": 0,
+										"strength": 10,
+										"dexterity": 5,
+										"intelligence": 5,
+										"attackModifier": 9,
+										"speedModifier": 4,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:02:04.724Z",
+										"updatedAt": "2025-06-15T01:02:04.724Z"
+									},
+									"characterDefendingRemaining": 0
+								}
+							]
+						}
+					],
+					"characterX": {
+						"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+						"job": "Mage",
+						"status": "Alive",
+						"name": "lupe_quintero",
+						"lifePoints": 12,
+						"currentLifePoints": 12,
+						"strength": 5,
+						"dexterity": 6,
+						"intelligence": 10,
+						"attackModifier": 14.2,
+						"speedModifier": 2.9000000000000004,
+						"entityType": "Character",
+						"createdAt": "2025-06-15T01:01:44.385Z",
+						"updatedAt": "2025-06-15T01:01:44.385Z"
+					},
+					"characterY": {
+						"characterId": "fcc554d2-8ab0-4611-9bb7-83e625a9883d",
+						"job": "Warrior",
+						"status": "Alive",
+						"name": "cholo_quintero",
+						"lifePoints": 20,
+						"currentLifePoints": 20,
+						"strength": 10,
+						"dexterity": 5,
+						"intelligence": 5,
+						"attackModifier": 9,
+						"speedModifier": 4,
+						"entityType": "Character",
+						"createdAt": "2025-06-15T01:02:04.724Z",
+						"updatedAt": "2025-06-15T01:02:04.724Z"
+					},
+					"winner": {
+						"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+						"job": "Mage",
+						"status": "Alive",
+						"name": "lupe_quintero",
+						"lifePoints": 12,
+						"currentLifePoints": 12,
+						"strength": 5,
+						"dexterity": 6,
+						"intelligence": 10,
+						"attackModifier": 14.2,
+						"speedModifier": 2.9000000000000004,
+						"entityType": "Character",
+						"createdAt": "2025-06-15T01:01:44.385Z",
+						"updatedAt": "2025-06-15T01:01:44.385Z"
+					},
+					"loser": {
+						"characterId": "fcc554d2-8ab0-4611-9bb7-83e625a9883d",
+						"job": "Warrior",
+						"status": "Alive",
+						"name": "cholo_quintero",
+						"lifePoints": 20,
+						"currentLifePoints": 0,
+						"strength": 10,
+						"dexterity": 5,
+						"intelligence": 5,
+						"attackModifier": 9,
+						"speedModifier": 4,
+						"entityType": "Character",
+						"createdAt": "2025-06-15T01:02:04.724Z",
+						"updatedAt": "2025-06-15T01:02:04.724Z"
+					}
+				}
+			}
+		]
+	},
+	{
+		"partitionKey": "Character#c5da96b9-bab4-4f65-91a3-4d6972d3a1ad#JobThief#Character#c4884e02-8dd6-4d6f-a4b9-ef22285a3f86#JobMage",
+		"items": [
+			{
+				"sortKey": "Battle#70ec3082-68a6-49c9-bc23-ff132ff1bbfe",
+				"data": {
+					"pk": "Character#c5da96b9-bab4-4f65-91a3-4d6972d3a1ad#JobThief#Character#c4884e02-8dd6-4d6f-a4b9-ef22285a3f86#JobMage",
+					"sk": "Battle#70ec3082-68a6-49c9-bc23-ff132ff1bbfe",
+					"entityType": "EntityType#Battle",
+					"createdAt": "2025-06-15T01:09:14.683Z",
+					"updatedAt": "2025-06-15T01:09:14.683Z",
+					"rounds": [
+						{
+							"roundNumber": 1,
+							"characterXSpeed": 8,
+							"characterYSpeed": 2.9000000000000004,
+							"turns": [
+								{
+									"turnNumber": 1,
+									"characterAttacking": {
+										"characterId": "c5da96b9-bab4-4f65-91a3-4d6972d3a1ad",
+										"job": "Thief",
+										"status": "Alive",
+										"name": "grecia",
+										"lifePoints": 15,
+										"currentLifePoints": 15,
+										"strength": 4,
+										"dexterity": 10,
+										"intelligence": 4,
+										"attackModifier": 12,
+										"speedModifier": 8,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:09:03.610Z",
+										"updatedAt": "2025-06-15T01:09:03.610Z"
+									},
+									"characterAttackingDamage": 1,
+									"characterDefending": {
+										"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+										"job": "Mage",
+										"status": "Alive",
+										"name": "lupe_quintero",
+										"lifePoints": 12,
+										"currentLifePoints": 12,
+										"strength": 5,
+										"dexterity": 6,
+										"intelligence": 10,
+										"attackModifier": 14.2,
+										"speedModifier": 2.9000000000000004,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:01:44.385Z",
+										"updatedAt": "2025-06-15T01:01:44.385Z"
+									},
+									"characterDefendingRemaining": 11
+								},
+								{
+									"turnNumber": 2,
+									"characterAttacking": {
+										"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+										"job": "Mage",
+										"status": "Alive",
+										"name": "lupe_quintero",
+										"lifePoints": 12,
+										"currentLifePoints": 11,
+										"strength": 5,
+										"dexterity": 6,
+										"intelligence": 10,
+										"attackModifier": 14.2,
+										"speedModifier": 2.9000000000000004,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:01:44.385Z",
+										"updatedAt": "2025-06-15T01:01:44.385Z"
+									},
+									"characterAttackingDamage": 14,
+									"characterDefending": {
+										"characterId": "c5da96b9-bab4-4f65-91a3-4d6972d3a1ad",
+										"job": "Thief",
+										"status": "Alive",
+										"name": "grecia",
+										"lifePoints": 15,
+										"currentLifePoints": 15,
+										"strength": 4,
+										"dexterity": 10,
+										"intelligence": 4,
+										"attackModifier": 12,
+										"speedModifier": 8,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:09:03.610Z",
+										"updatedAt": "2025-06-15T01:09:03.610Z"
+									},
+									"characterDefendingRemaining": 1
+								}
+							]
+						},
+						{
+							"roundNumber": 2,
+							"characterXSpeed": 8,
+							"characterYSpeed": 2.9000000000000004,
+							"turns": [
+								{
+									"turnNumber": 1,
+									"characterAttacking": {
+										"characterId": "c5da96b9-bab4-4f65-91a3-4d6972d3a1ad",
+										"job": "Thief",
+										"status": "Alive",
+										"name": "grecia",
+										"lifePoints": 15,
+										"currentLifePoints": 15,
+										"strength": 4,
+										"dexterity": 10,
+										"intelligence": 4,
+										"attackModifier": 12,
+										"speedModifier": 8,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:09:03.610Z",
+										"updatedAt": "2025-06-15T01:09:03.610Z"
+									},
+									"characterAttackingDamage": 4,
+									"characterDefending": {
+										"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+										"job": "Mage",
+										"status": "Alive",
+										"name": "lupe_quintero",
+										"lifePoints": 12,
+										"currentLifePoints": 0,
+										"strength": 5,
+										"dexterity": 6,
+										"intelligence": 10,
+										"attackModifier": 14.2,
+										"speedModifier": 2.9000000000000004,
+										"entityType": "Character",
+										"createdAt": "2025-06-15T01:01:44.385Z",
+										"updatedAt": "2025-06-15T01:01:44.385Z"
+									},
+									"characterDefendingRemaining": 0
+								}
+							]
+						}
+					],
+					"characterX": {
+						"characterId": "c5da96b9-bab4-4f65-91a3-4d6972d3a1ad",
+						"job": "Thief",
+						"status": "Alive",
+						"name": "grecia",
+						"lifePoints": 15,
+						"currentLifePoints": 15,
+						"strength": 4,
+						"dexterity": 10,
+						"intelligence": 4,
+						"attackModifier": 12,
+						"speedModifier": 8,
+						"entityType": "Character",
+						"createdAt": "2025-06-15T01:09:03.610Z",
+						"updatedAt": "2025-06-15T01:09:03.610Z"
+					},
+					"characterY": {
+						"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+						"job": "Mage",
+						"status": "Alive",
+						"name": "lupe_quintero",
+						"lifePoints": 12,
+						"currentLifePoints": 12,
+						"strength": 5,
+						"dexterity": 6,
+						"intelligence": 10,
+						"attackModifier": 14.2,
+						"speedModifier": 2.9000000000000004,
+						"entityType": "Character",
+						"createdAt": "2025-06-15T01:01:44.385Z",
+						"updatedAt": "2025-06-15T01:01:44.385Z"
+					},
+					"winner": {
+						"characterId": "c5da96b9-bab4-4f65-91a3-4d6972d3a1ad",
+						"job": "Thief",
+						"status": "Alive",
+						"name": "grecia",
+						"lifePoints": 15,
+						"currentLifePoints": 15,
+						"strength": 4,
+						"dexterity": 10,
+						"intelligence": 4,
+						"attackModifier": 12,
+						"speedModifier": 8,
+						"entityType": "Character",
+						"createdAt": "2025-06-15T01:09:03.610Z",
+						"updatedAt": "2025-06-15T01:09:03.610Z"
+					},
+					"loser": {
+						"characterId": "c4884e02-8dd6-4d6f-a4b9-ef22285a3f86",
+						"job": "Mage",
+						"status": "Alive",
+						"name": "lupe_quintero",
+						"lifePoints": 12,
+						"currentLifePoints": 0,
+						"strength": 5,
+						"dexterity": 6,
+						"intelligence": 10,
+						"attackModifier": 14.2,
+						"speedModifier": 2.9000000000000004,
+						"entityType": "Character",
+						"createdAt": "2025-06-15T01:01:44.385Z",
+						"updatedAt": "2025-06-15T01:01:44.385Z"
+					}
+				}
+			}
+		]
+	}
+]

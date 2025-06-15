@@ -20,7 +20,9 @@ export class BattleDomainService {
         battleId: input.BattleId,
         characterX: input.characterX,
         characterY: input.characterY,
-        rounds: input.rounds
+        rounds: input.rounds,
+        winner: input.winner,
+        loser: input.loser
       }
     );
   }
@@ -37,6 +39,8 @@ export class BattleDomainService {
       characterX: model.characterX,
       characterY: model.characterY,
       rounds: model.rounds,
+      winner: model.winner,
+      loser: model.loser,
       entityType,
       createdAt: model.createdAt,
       updatedAt: model.updatedAt

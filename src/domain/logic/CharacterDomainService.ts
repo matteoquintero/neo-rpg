@@ -63,7 +63,7 @@ export class CharacterDomainService {
     if (!model.pk || !model.sk) {
       throw new ErrorHandler("Invalid model: pk or sk keys are missing.", 400);
     }
-    const characterId = CharacterModel.ExtractCharacterIdFromSk({ sk: model.sk, job: model.job });
+    const characterId = CharacterModel.ExtractCharacterIdFromSk({ sk: model.sk, status: model.status });
     const entityType = CharacterModel.ExtractEntityType({ entityType: model.entityType });
 
     return {
@@ -72,6 +72,7 @@ export class CharacterDomainService {
       status: model.status,
       name: model.name,
       lifePoints: model.lifePoints,
+      currentLifePoints: model.currentLifePoints,
       strength: model.strength,
       dexterity: model.dexterity,
       intelligence: model.intelligence,

@@ -10,6 +10,7 @@ import { CharacterDomainService } from "../../domain/logic/CharacterDomainServic
 import { CharacterRepository } from "../../infrastructure/repositories/CharacterRepository";
 import { DatabaseHandler } from "../../shared/utilities/DatabaseHandler";
 import { ErrorHandler } from "../../shared/utilities/ErrorHandler";
+import { Logger } from "../../infrastructure/logger/Logger";
 
 export class CharacterUseCase {
   constructor(
@@ -63,11 +64,12 @@ export class CharacterUseCase {
     if (!existing) {
       throw new ErrorHandler("Character not found", 404);
     }
-
+    Logger.info(`Updating character ${input.characterId} ${pk} ${sk} with status ${input.updates.status}`);
     const updated = await DatabaseHandler.execute(
       () => this.repository.updateCharacter({
         pk,
         sk,
+        newSk: input.updates.sk,
         updates: input.updates
       }),
       `Character ${input.characterId} updated successfully.`,
