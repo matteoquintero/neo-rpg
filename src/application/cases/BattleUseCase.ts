@@ -20,7 +20,8 @@ export class BattleUseCase {
     private readonly domainService: BattleDomainService,
     private readonly repository: BattleRepository,
     private readonly ensureCharacterService: EnsureCharacterService,
-    private readonly killCharacterService: KillCharacterService
+    private readonly killCharacterService: KillCharacterService,
+    private readonly battleRoundService: BattleRoundService
   ) { }
 
   async createBattle(
@@ -40,8 +41,7 @@ export class BattleUseCase {
     });
 
     const BattleId = uuidv4();
-    const battleRoundService = new BattleRoundService();
-    const battleResult = battleRoundService.generateBattleRounds(characterX, characterY);
+    const battleResult = this.battleRoundService.generateBattleRounds(characterX, characterY);
 
     if (battleResult.loser) {
       await this.killCharacterService.execute(battleResult.loser);

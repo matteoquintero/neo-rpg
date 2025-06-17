@@ -11,6 +11,7 @@ import { BattleRepository } from "../repositories/BattleRepository";
 import { BattleUseCase } from "../../application/cases/BattleUseCase";
 import { EnsureCharacterService } from "../../domain/services/EnsureCharacterService";
 import { KillCharacterService } from "../../domain/services/KillCharacterService";
+import { BattleRoundService } from "../../domain/services/BattleRoundService";
 
 const NEO_RPG_TABLE_NAME = process.env.NEO_RPG_TABLE_NAME as string;
 
@@ -27,7 +28,7 @@ const EnsureCharacterServiceObject = new EnsureCharacterService(
   CharacterDomainServiceObject
 );
 
-
+const BattleRoundServiceObject = new BattleRoundService();
 // Use Cases
 const CharacterUseCaseObject = new CharacterUseCase(
   CharacterDomainServiceObject,
@@ -40,7 +41,8 @@ const BattleUseCaseObject = new BattleUseCase(
   BattleDomainServiceObject,
   BattleRepositoryObject,
   EnsureCharacterServiceObject,
-  KillCharacterServiceObject
+  KillCharacterServiceObject,
+  BattleRoundServiceObject
 );
 
 // Routers
