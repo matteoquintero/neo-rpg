@@ -63,12 +63,11 @@ describe('BattleRoundService', () => {
   });
 
   it('should retry if speed is a draw', () => {
-    // First call: draw, Second call: X wins
     const mockRandom = jest.fn()
-      .mockReturnValueOnce(7) // X speed
-      .mockReturnValueOnce(7) // Y speed (draw)
-      .mockReturnValueOnce(9) // X speed
-      .mockReturnValueOnce(5); // Y speed
+      .mockReturnValueOnce(7)
+      .mockReturnValueOnce(7)
+      .mockReturnValueOnce(9)
+      .mockReturnValueOnce(5);
     jest.spyOn<any, any>(service, 'generateRandomNumber').mockImplementation(mockRandom);
     // @ts-ignore: access private method for test
     const attacker = service.determineFirstAttacker(characterX, characterY);
@@ -95,12 +94,11 @@ describe('BattleRoundService', () => {
   });
 
   it('should generate a single round with one or two turns', () => {
-    // First attacker: X, X deals 30, Y survives, Y deals 100, X dies
     const mockRandom = jest.fn()
-      .mockReturnValueOnce(10) // X speed
-      .mockReturnValueOnce(5) // Y speed
-      .mockReturnValueOnce(30) // X damage
-      .mockReturnValueOnce(100); // Y damage
+      .mockReturnValueOnce(10)
+      .mockReturnValueOnce(5)
+      .mockReturnValueOnce(30)
+      .mockReturnValueOnce(100);
     jest.spyOn<any, any>(service, 'generateRandomNumber').mockImplementation(mockRandom);
     // @ts-ignore: access private method for test
     const round = service.generateSingleRound(characterX, characterY);
@@ -113,11 +111,10 @@ describe('BattleRoundService', () => {
   });
 
   it('should generate a single round with only one turn if defender is defeated', () => {
-    // First attacker: X, X deals 100, Y dies
     const mockRandom = jest.fn()
-      .mockReturnValueOnce(10) // X speed
-      .mockReturnValueOnce(5) // Y speed
-      .mockReturnValueOnce(100); // X damage
+      .mockReturnValueOnce(10)
+      .mockReturnValueOnce(5)
+      .mockReturnValueOnce(100);
     jest.spyOn<any, any>(service, 'generateRandomNumber').mockImplementation(mockRandom);
     // @ts-ignore: access private method for test
     const round = service.generateSingleRound(characterX, characterY);
@@ -128,7 +125,6 @@ describe('BattleRoundService', () => {
   });
 
   it('should simulate a full battle and return winner and loser', () => {
-    // X always attacks first, deals 100, Y dies in first round
     jest.spyOn<any, any>(service, 'generateSingleRound').mockImplementation((x, y) => {
       const charX = x as GetCharacterOutput;
       const charY = y as GetCharacterOutput;
@@ -154,7 +150,6 @@ describe('BattleRoundService', () => {
   });
 
   it('should reset the round counter', () => {
-    // Simulate increment
     // @ts-ignore: access private property
     service.currentRound = 5;
     service.resetRounds();

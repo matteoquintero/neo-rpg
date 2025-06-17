@@ -91,7 +91,7 @@ describe('CharacterRouter', () => {
       mockMiddleware.validate.mockReturnValue(errorResponse);
 
       const result = router.validateRequest('POST', '/character', {
-        name: 'A', // Nombre demasiado corto
+        name: 'A',
         job: SupportedJobs.WARRIOR
       });
 

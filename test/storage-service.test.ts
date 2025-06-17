@@ -2,7 +2,6 @@ import { StorageService } from '../src/infrastructure/database/StorageService';
 import { BaseModel } from '../src/domain/models/BaseModel';
 import { BaseModelParams } from '../src/shared/types/BaseModelType';
 
-// In this context, pk represents a userId and sk represents a characterId or itemId
 class TestModel extends BaseModel {
   value?: string;
   constructor(params: BaseModelParams & { value?: string }) {
